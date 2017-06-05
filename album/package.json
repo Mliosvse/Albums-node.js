@@ -1,0 +1,12 @@
+{
+  "name": "album",
+  "version": "1.0.0",
+  "description": "相册小练习",
+  "main": "app.js",
+  "author": "zyj",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3",
+    "nunjucks": "^3.0.1"
+  }
+}
