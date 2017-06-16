@@ -1,21 +1,22 @@
 {%extends "base.njk"%}
-
 {%block content%}
   <div class="row">
-    {%for dir in albumArr%}
-      {{item(dir)}}
+    {%for album in albumArr%}
+      {{item(album.albumname)}}
     {%endfor%}
   </div>
 {%endblock%}
 
 {%macro item(name)%}
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="img/wjj.jpg" alt="{{name}}">
+<div class="col-sm-6 col-md-4">
+  <div class="thumbnail">
+      <img src="img/wjj.jpeg" alt="...">
       <div class="caption">
         <h3>{{name}}</h3>
-        <p><a href="{{name}}" class="btn btn-primary" role="button">进入</a></p>
+        <p>
+          <a href="{{name}}" class="btn btn-default" role="button">点击进去</a>
+        </p>
       </div>
-    </div>
+  </div>
   </div>
 {%endmacro%}

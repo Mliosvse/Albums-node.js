@@ -1,0 +1,94 @@
+{%extends "base.njk"%}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-md-3"></div>
+
+    <div class="col-md-6">
+
+      <form class="form-inline" id="createform">
+        <div class="form-group">
+          <p class="form-control-static">创建相册:</p>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="albumname" name="albumname" placeholder="输入相册名">
+        </div>
+        <button type="button" id="createbtn" class="btn btn-default">确定</button>
+      </form>
+      <hr/>
+
+      <form id="uploadform">
+        <div class="form-group">
+          <h5>选择上传的相册: </h5>
+          <select class="form-control" name="albumname">
+            {#{% for album in albumArr %}
+              <option value={{album.name}}>{{album.name}}</option>
+            {%endfor%}#}
+            {%for album in albumArr%}
+              <option value={{album.albumname}}>{{album.albumname}}</option>
+            {%endfor%}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputFile">选择照片</label>
+          <input type="file" name="file" id="exampleInputFile">
+          <button id="uploadbtn" type="button" class="btn btn-primary">上传</button>
+        </div>
+      </form>
+
+
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+
+  <script>
+    $('#uploadbtn').click(function(){
+
+      var fileVal = document.getElementById("exampleInputFile").value;
+
+      if(!fileVal){
+         return alert("文件不能为空！")
+      }
+      
+
+      var data = new FormData(document.getElementById("uploadform"));
+      $.ajax({
+        cache: false,
+        type: "POST",
+        url:'/album/upload',
+        data:data,
+        processData:false,
+        contentType:false,
+        error: function(request) {
+          alert("error");
+        },
+        success: function(data) {
+          alert(data.msg);
+        }
+      });
+    })
+
+    $('#createbtn').click(function(){
+
+      var data = new FormData(document.getElementById("createform"));
+      $.ajax({
+        cache: false,
+        type: "POST",
+        url:'/album/create',
+        data:data,
+        processData:false,
+        contentType:false,
+        error: function(request) {
+          alert("error");
+        },
+        success: function(data) {
+          alert(data.msg);
+        }
+      });
+    })
+
+  </script>
+
+{% endblock %}
